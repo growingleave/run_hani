@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HANI 10m Dash</title>
+  <style>
+    :root {
+      --panel-bg: rgba(255, 255, 255, 0.86);
+      --panel-fg: #1d2330;
+      --muted: #5b6475;
+      --accent: #e8731f;
+      --btn-bg: #1d2330;
+      --btn-fg: #ffffff;
+      --border: rgba(29, 35, 48, 0.12);
+      --page-bg: #bfe0f5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --panel-bg: rgba(22, 26, 34, 0.86);
+        --panel-fg: #eef1f6;
+        --muted: #a3acbd;
+        --btn-bg: #eef1f6;
+        --btn-fg: #161a22;
+        --border: rgba(255, 255, 255, 0.14);
+        --page-bg: #1b2430;
+      }
+    }
+    :root[data-theme="dark"] {
+      --panel-bg: rgba(22, 26, 34, 0.86);
+      --panel-fg: #eef1f6;
+      --muted: #a3acbd;
+      --btn-bg: #eef1f6;
+      --btn-fg: #161a22;
+      --border: rgba(255, 255, 255, 0.14);
+      --page-bg: #1b2430;
+    }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: var(--page-bg); }
+    body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans KR", sans-serif; color: var(--panel-fg); }
+    #view { position: fixed; inset: 0; }
+    .panel {
+      position: fixed; background: var(--panel-bg); border: 1px solid var(--border);
+      border-radius: 12px; backdrop-filter: blur(6px); padding: 12px 14px;
+    }
+    #hud { top: 16px; left: 16px; min-width: 210px; }
+    #hud h1 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0.04em; }
+    #hud h1 span { color: var(--accent); }
+    .row { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; line-height: 1.7; }
+    .row b { font-variant-numeric: tabular-nums; }
+    .muted { color: var(--muted); }
+    #controls { left: 16px; right: 16px; bottom: 16px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 640px; margin: 0 auto; }
+    button {
+      font: inherit; font-size: 13px; border: 0; border-radius: 8px; padding: 8px 12px;
+      background: var(--btn-bg); color: var(--btn-fg); cursor: pointer;
+    }
+    button.off { background: var(--accent); color: #fff; }
+    kbd { font-size: 11px; opacity: 0.7; margin-left: 4px; }
+    #loading { inset: 0; display: grid; place-items: center; font-size: 15px; border-radius: 0; border: 0; }
+    #loading.hidden { display: none; }
+    @media (max-width: 520px) {
+      #hud { top: 16px; left: 16px; right: 16px; min-width: 0; }
+      kbd { display: none; }
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+        "@mujoco/mujoco": "https://cdn.jsdelivr.net/npm/@mujoco/mujoco@3.17.0/mujoco.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="view"></div>
+
+  <div id="hud" class="panel">
+    <h1>HANI <span>10m DASH</span></h1>
+    <div class="row"><span class="muted">상태</span><b id="status">준비</b></div>
+    <div class="row"><span class="muted">시간</span><b id="time">0.00 s</b></div>
+    <div class="row"><span class="muted">이동 거리</span><b id="dist">0.00 m</b></div>
+    <div class="row"><span class="muted">속도</span><b id="speed">0.00 m/s</b></div>
+    <div class="row"><span class="muted">몸통 높이</span><b id="height">0.00 m</b></div>
+  </div>
+
+  <div id="controls" class="panel">
+    <button id="btn-reset">리셋<kbd>R</kbd></button>
+    <button id="btn-motor">모터 끄기<kbd>M</kbd></button>
+    <button id="btn-push">밀기<kbd>P</kbd></button>
+    <button id="btn-pause">일시정지<kbd>Space</kbd></button>
+    <button id="btn-cam">카메라: 추적<kbd>C</kbd></button>
+  </div>
+
+  <div id="loading" class="panel">물리 엔진 불러오는 중…</div>
+
+  <script type="module" src="web/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!--
+  HANI 10m dash track: a small original quadruped on a 3-lane, 10 m track.
+  Generated layout: start line at x = 0, finish line at x = 10, lanes along +x.
+  Physics only sees the floor plane and the robot; every track/stadium geom is
+  visual-only (contype=0 conaffinity=0) so the scene can be reused for training.
+-->
+<mujoco model="hani_track">
+  <compiler angle="radian" autolimits="true"/>
+  <option timestep="0.005" integrator="implicitfast"/>
+
+  <default>
+    <default class="hani">
+      <joint damping="0.5" armature="0.01" frictionloss="0.05"/>
+      <position kp="60" kv="1.5" forcerange="-30 30"/>
+      <default class="abduction">
+        <joint axis="1 0 0" range="-0.8 0.8"/>
+        <position ctrlrange="-0.8 0.8"/>
+      </default>
+      <default class="thigh">
+        <joint axis="0 1 0" range="-1.5 3.0"/>
+        <position ctrlrange="-1.5 3.0"/>
+      </default>
+      <default class="calf">
+        <joint axis="0 1 0" range="-2.7 -0.8"/>
+        <position ctrlrange="-2.7 -0.8"/>
+      </default>
+      <default class="robot">
+        <geom contype="1" conaffinity="0" group="0"/>
+      </default>
+    </default>
+    <default class="deco">
+      <geom contype="0" conaffinity="0" group="1"/>
+      <default class="line">
+        <geom type="box" rgba="0.97 0.97 0.97 1"/>
+      </default>
+    </default>
+  </default>
+
+  <worldbody>
+    <light name="sun" pos="5 -3 8" dir="-0.3 0.4 -1" directional="true"/>
+    <geom name="floor" type="plane" size="40 40 0.1" rgba="0.36 0.6 0.3 1" friction="1.0 0.02 0.01"/>
+    <geom name="track" class="deco" type="box" pos="5.0 0 0.0005" size="9.0 2.130 0.0005" rgba="0.72 0.27 0.18 1"/>
+    <geom name="lane_line0" class="line" pos="5.0 -1.830 0.0012" size="9.0 0.025 0.0002"/>
+    <geom name="lane_line1" class="line" pos="5.0 -0.610 0.0012" size="9.0 0.025 0.0002"/>
+    <geom name="lane_line2" class="line" pos="5.0 0.610 0.0012" size="9.0 0.025 0.0002"/>
+    <geom name="lane_line3" class="line" pos="5.0 1.830 0.0012" size="9.0 0.025 0.0002"/>
+    <geom name="start_line" class="line" pos="0 0 0.0012" size="0.025 1.830 0.0002"/>
+    <geom class="line" pos="9.95 -1.769 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 -1.647 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 -1.525 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 -1.403 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 -1.281 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 -1.159 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 -1.037 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 -0.915 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 -0.793 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 -0.671 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 -0.549 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 -0.427 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 -0.305 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 -0.183 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 -0.061 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 0.061 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 0.183 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 0.305 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 0.427 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 0.549 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 0.671 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 0.793 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 0.915 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 1.037 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 1.159 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 1.281 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 1.403 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 1.525 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="9.95 1.647 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="9.95 1.769 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -1.769 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -1.647 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 -1.525 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -1.403 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 -1.281 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -1.159 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 -1.037 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -0.915 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 -0.793 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -0.671 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 -0.549 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -0.427 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 -0.305 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 -0.183 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 -0.061 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 0.061 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 0.183 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 0.305 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 0.427 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 0.549 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 0.671 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 0.793 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 0.915 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 1.037 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 1.159 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 1.281 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 1.403 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 1.525 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="10.05 1.647 0.0012" size="0.05 0.0610 0.0002" rgba="0.08 0.08 0.08 1"/>
+    <geom class="line" pos="10.05 1.769 0.0012" size="0.05 0.0610 0.0002" rgba="0.95 0.95 0.95 1"/>
+    <geom class="line" pos="1 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="1 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="2 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="2 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="3 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="3 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="4 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="4 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="5 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="5 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="6 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="6 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="7 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="7 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="8 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="8 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="9 -1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="line" pos="9 1.980 0.0012" size="0.02 0.1 0.0002"/>
+    <geom class="deco" type="cylinder" pos="10 -2.330 1.15" size="0.07 1.15" rgba="0.85 0.86 0.9 1"/>
+    <geom class="deco" type="cylinder" pos="10 2.330 1.15" size="0.07 1.15" rgba="0.85 0.86 0.9 1"/>
+    <geom name="finish_banner" class="deco" type="box" pos="10 0 2.3" size="0.06 2.480 0.22" rgba="0.1 0.22 0.55 1"/>
+    <geom class="deco" type="box" pos="5 3.830 0.25" size="10 0.45 0.25" rgba="0.55 0.57 0.62 1"/>
+    <geom class="deco" type="box" pos="5 4.730 0.55" size="10 0.45 0.55" rgba="0.48 0.5 0.56 1"/>
+    <geom class="deco" type="box" pos="5 5.630 0.85" size="10 0.45 0.85" rgba="0.42 0.44 0.5 1"/>
+    <geom class="deco" type="box" pos="5 6.530 1.15" size="10 0.45 1.15" rgba="0.36 0.38 0.44 1"/>
+    <geom class="deco" type="box" pos="5 7.430 2.2" size="10 0.15 2.2" rgba="0.3 0.32 0.38 1"/>
+    <geom class="deco" type="box" pos="-2 -4.830 0.45" size="1.8 0.05 0.45" rgba="0.98 0.78 0.2 1"/>
+    <geom class="deco" type="box" pos="2 -4.830 0.45" size="1.8 0.05 0.45" rgba="0.2 0.6 0.9 1"/>
+    <geom class="deco" type="box" pos="6 -4.830 0.45" size="1.8 0.05 0.45" rgba="0.95 0.35 0.35 1"/>
+    <geom class="deco" type="box" pos="10 -4.830 0.45" size="1.8 0.05 0.45" rgba="0.3 0.75 0.45 1"/>
+    <geom class="deco" type="box" pos="14 -4.830 0.45" size="1.8 0.05 0.45" rgba="0.98 0.78 0.2 1"/>
+
+    <body name="trunk" pos="-0.35 0 0.3" childclass="hani">
+      <freejoint name="root"/>
+      <geom class="robot" type="box" size="0.19 0.075 0.055" mass="6" rgba="0.92 0.93 0.95 1"/>
+      <geom class="robot" type="box" pos="0 0 0.058" size="0.15 0.06 0.006" mass="0.1" rgba="0.95 0.45 0.12 1"/>
+      <geom class="robot" type="box" pos="0.205 0 0.01" size="0.02 0.065 0.04" mass="0.2" rgba="0.18 0.2 0.24 1"/>
+      <geom class="robot" type="sphere" pos="0.222 0.032 0.02" size="0.012" mass="0.01" rgba="0.3 0.85 1 1"/>
+      <geom class="robot" type="sphere" pos="0.222 -0.032 0.02" size="0.012" mass="0.01" rgba="0.3 0.85 1 1"/>
+      <site name="imu" pos="0 0 0"/>
+
+      <body name="FL_hip" pos="0.17 0.050 0">
+        <joint name="FL_hip_joint" class="abduction"/>
+        <geom class="robot" type="cylinder" size="0.042 0.022" pos="0 0.045 0" zaxis="0 1 0" mass="0.5" rgba="0.95 0.45 0.12 1"/>
+        <body name="FL_thigh" pos="0 0.090 0">
+          <joint name="FL_thigh_joint" class="thigh"/>
+          <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.024" mass="0.8" rgba="0.92 0.93 0.95 1"/>
+          <body name="FL_calf" pos="0 0 -0.2">
+            <joint name="FL_calf_joint" class="calf"/>
+            <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.014" mass="0.2" rgba="0.18 0.2 0.24 1"/>
+            <geom name="FL_foot" class="robot" type="sphere" pos="0 0 -0.2" size="0.022" mass="0.05" friction="1.0 0.02 0.01" rgba="0.1 0.1 0.12 1"/>
+          </body>
+        </body>
+      </body>
+      <body name="FR_hip" pos="0.17 -0.050 0">
+        <joint name="FR_hip_joint" class="abduction"/>
+        <geom class="robot" type="cylinder" size="0.042 0.022" pos="0 -0.045 0" zaxis="0 1 0" mass="0.5" rgba="0.95 0.45 0.12 1"/>
+        <body name="FR_thigh" pos="0 -0.090 0">
+          <joint name="FR_thigh_joint" class="thigh"/>
+          <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.024" mass="0.8" rgba="0.92 0.93 0.95 1"/>
+          <body name="FR_calf" pos="0 0 -0.2">
+            <joint name="FR_calf_joint" class="calf"/>
+            <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.014" mass="0.2" rgba="0.18 0.2 0.24 1"/>
+            <geom name="FR_foot" class="robot" type="sphere" pos="0 0 -0.2" size="0.022" mass="0.05" friction="1.0 0.02 0.01" rgba="0.1 0.1 0.12 1"/>
+          </body>
+        </body>
+      </body>
+      <body name="RL_hip" pos="-0.17 0.050 0">
+        <joint name="RL_hip_joint" class="abduction"/>
+        <geom class="robot" type="cylinder" size="0.042 0.022" pos="0 0.045 0" zaxis="0 1 0" mass="0.5" rgba="0.95 0.45 0.12 1"/>
+        <body name="RL_thigh" pos="0 0.090 0">
+          <joint name="RL_thigh_joint" class="thigh"/>
+          <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.024" mass="0.8" rgba="0.92 0.93 0.95 1"/>
+          <body name="RL_calf" pos="0 0 -0.2">
+            <joint name="RL_calf_joint" class="calf"/>
+            <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.014" mass="0.2" rgba="0.18 0.2 0.24 1"/>
+            <geom name="RL_foot" class="robot" type="sphere" pos="0 0 -0.2" size="0.022" mass="0.05" friction="1.0 0.02 0.01" rgba="0.1 0.1 0.12 1"/>
+          </body>
+        </body>
+      </body>
+      <body name="RR_hip" pos="-0.17 -0.050 0">
+        <joint name="RR_hip_joint" class="abduction"/>
+        <geom class="robot" type="cylinder" size="0.042 0.022" pos="0 -0.045 0" zaxis="0 1 0" mass="0.5" rgba="0.95 0.45 0.12 1"/>
+        <body name="RR_thigh" pos="0 -0.090 0">
+          <joint name="RR_thigh_joint" class="thigh"/>
+          <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.024" mass="0.8" rgba="0.92 0.93 0.95 1"/>
+          <body name="RR_calf" pos="0 0 -0.2">
+            <joint name="RR_calf_joint" class="calf"/>
+            <geom class="robot" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.014" mass="0.2" rgba="0.18 0.2 0.24 1"/>
+            <geom name="RR_foot" class="robot" type="sphere" pos="0 0 -0.2" size="0.022" mass="0.05" friction="1.0 0.02 0.01" rgba="0.1 0.1 0.12 1"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <position name="FL_hip" joint="FL_hip_joint" class="abduction"/>
+    <position name="FL_thigh" joint="FL_thigh_joint" class="thigh"/>
+    <position name="FL_calf" joint="FL_calf_joint" class="calf"/>
+    <position name="FR_hip" joint="FR_hip_joint" class="abduction"/>
+    <position name="FR_thigh" joint="FR_thigh_joint" class="thigh"/>
+    <position name="FR_calf" joint="FR_calf_joint" class="calf"/>
+    <position name="RL_hip" joint="RL_hip_joint" class="abduction"/>
+    <position name="RL_thigh" joint="RL_thigh_joint" class="thigh"/>
+    <position name="RL_calf" joint="RL_calf_joint" class="calf"/>
+    <position name="RR_hip" joint="RR_hip_joint" class="abduction"/>
+    <position name="RR_thigh" joint="RR_thigh_joint" class="thigh"/>
+    <position name="RR_calf" joint="RR_calf_joint" class="calf"/>
+  </actuator>
+
+  <sensor>
+    <framequat name="trunk_quat" objtype="site" objname="imu"/>
+    <gyro name="trunk_gyro" site="imu"/>
+    <velocimeter name="trunk_vel" site="imu"/>
+  </sensor>
+
+  <keyframe>
+    <key name="home" qpos="-0.35 0 0.26 1 0 0 0 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8" ctrl="0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8"/>
+  </keyframe>
+</mujoco>
